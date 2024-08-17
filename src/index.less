@@ -1,0 +1,45 @@
+.tree-gragh {
+    display: flex;
+    flex-direction: row;
+
+    .head {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.nodeSingleWrap {
+    display: flex;
+    align-items: center;
+}
+
+.branchWrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.branch {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.leftTopHalfLine {
+    position: absolute;
+    width: 2px;
+    height: 50%;
+    top: 0px;
+    left: -1px;
+    background: #d9d9d9;
+}
+
+.leftBottomHalfLine {
+    position: absolute;
+    width: 2px;
+    height: 50%;
+    bottom: 0px;
+    left: -1px;
+    background: #d9d9d9;
+}
