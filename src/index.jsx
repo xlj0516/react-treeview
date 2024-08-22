@@ -2,7 +2,7 @@ import React from 'react';
 import Node from './node';
 import styles from './index.less';
 
-const Tree = ({ treeData, childrenName = 'children' }) => {
+const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal' }) => {
     const children = treeData[childrenName];
     const renderChildren = (child) => {
         const number = child?.length;
@@ -13,27 +13,24 @@ const Tree = ({ treeData, childrenName = 'children' }) => {
                 const node = child[0] || {};
                 const sonNode = node[childrenName];
                 return (
-                    // <div className={styles.nodeSingleWrap}>
                     <div className="nodeSingleWrap">
-                        <Node nodeInfo={node} hasTail={!!sonNode?.length} />
+                        <Node nodeInfo={node} hasTail={!!sonNode?.length} direction={direction} />
                         {sonNode?.length > 0 && renderChildren(sonNode)}
                     </div >
                 );
             }
             // 后代为多节点分支需要画连接线
             return (
-                // <div className={styles.branchWrap}/>
                 <div className="branchWrap">
                     {child.map((item, index) => {
                         const sonNode = item[childrenName];
                         return (
-                            // <div className={styles.branch}>
                             <div className="branch">
-                                {/* {index !== 0 && <div className={styles.leftTopHalfLine} />} */}
-                                {index !== 0 && <div className="leftTopHalfLine" />}
-                                {/* {index !== number - 1 && <div className={styles.leftBottomHalfLine} />} */}
-                                {index !== number - 1 && <div className="leftBottomHalfLine" />}
-                                <Node nodeInfo={item} hasTail={!!sonNode?.length} />
+                                {direction === 'horizontal' && index !== 0 && <div className="leftTopHalfLine" />}
+                                {direction === 'horizontal' && index !== number - 1 && <div className="leftBottomHalfLine" />}
+                                {direction === 'vertical' && index !== 0 && <div className="leftHalfLine" />}
+                                {direction === 'vertical' && index !== number - 1 && <div className="rightHalfLine" />}
+                                <Node nodeInfo={item} hasTail={!!sonNode?.length} direction={direction} />
                                 {sonNode?.length > 0 && renderChildren(sonNode)}
                             </div>
                         );
@@ -44,11 +41,9 @@ const Tree = ({ treeData, childrenName = 'children' }) => {
         return '';
     };
     return (
-        // <div className={styles['tree-gragh']}>
-        <div className='tree-gragh'>
-            {/* <div className={styles.head}> */}
+        <div className={`tree-gragh ${direction === 'vertical' ? 'tree-gragh-vertical' : ''}`}>
             <div className="head">
-                <Node nodeInfo={treeData} hasHead={false} />
+                <Node nodeInfo={treeData} hasHead={false} direction={direction} />
             </div>
             <>{renderChildren(children)}</>
         </div >

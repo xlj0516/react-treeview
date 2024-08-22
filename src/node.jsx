@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './node.less';
 
-const Node = ({ nodeInfo, hasHead, hasTail }) => {
+const Node = ({ nodeInfo, hasHead, hasTail, direction }) => {
     const { content, title } = nodeInfo || {};
     return (
-        <div className='tree-node-wrap'>
+        <div className={`tree-node-wrap ${direction === 'vertical' ? 'tree-node-wrap-vertical' : ''}`}>
             {!!hasHead && <div className='tree-node-before' />}
             <div className={`tree-node ${hasHead ? '' : 'tree-node-noHead'}`}>
                 <div className='tree-title'>

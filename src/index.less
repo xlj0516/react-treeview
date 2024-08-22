@@ -43,3 +43,43 @@
     left: -1px;
     background: #d9d9d9;
 }
+
+.leftHalfLine {
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    top: 0px;
+    left: 0px;
+    background: #d9d9d9;
+}
+
+.rightHalfLine {
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    top: 0px;
+    right: 0px;
+    background: #d9d9d9;
+}
+
+.tree-gragh-vertical {
+    flex-direction: column;
+
+    .head {
+        display: flex;
+        justify-content: center;
+    }
+
+    .branchWrap {
+        flex-direction: row;
+    }
+
+    .branch {
+        display: inline-flex;
+        flex-direction: column;
+        position: relative;
+        // display: inline-flex;
+        // align-items: center;
+        padding: 0 10px;
+    }
+}
