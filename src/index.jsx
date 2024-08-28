@@ -2,7 +2,7 @@ import React from 'react';
 import Node from './node';
 import styles from './index.less';
 
-const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal' }) => {
+const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal', nodeContent }) => {
     const children = treeData[childrenName];
     const renderChildren = (child) => {
         const number = child?.length;
@@ -14,7 +14,7 @@ const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal' })
                 const sonNode = node[childrenName];
                 return (
                     <div className="nodeSingleWrap">
-                        <Node nodeInfo={node} hasTail={!!sonNode?.length} direction={direction} />
+                        <Node nodeInfo={node} hasTail={!!sonNode?.length} direction={direction} configContent={nodeContent} />
                         {sonNode?.length > 0 && renderChildren(sonNode)}
                     </div >
                 );
@@ -30,7 +30,7 @@ const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal' })
                                 {direction === 'horizontal' && index !== number - 1 && <div className="leftBottomHalfLine" />}
                                 {direction === 'vertical' && index !== 0 && <div className="leftHalfLine" />}
                                 {direction === 'vertical' && index !== number - 1 && <div className="rightHalfLine" />}
-                                <Node nodeInfo={item} hasTail={!!sonNode?.length} direction={direction} />
+                                <Node nodeInfo={item} hasTail={!!sonNode?.length} direction={direction} configContent={nodeContent} />
                                 {sonNode?.length > 0 && renderChildren(sonNode)}
                             </div>
                         );
@@ -43,7 +43,7 @@ const Tree = ({ treeData, childrenName = 'children', direction = 'horizontal' })
     return (
         <div className={`tree-gragh ${direction === 'vertical' ? 'tree-gragh-vertical' : ''}`}>
             <div className="head">
-                <Node nodeInfo={treeData} hasHead={false} direction={direction} />
+                <Node nodeInfo={treeData} hasHead={false} direction={direction} configContent={nodeContent} />
             </div>
             <>{renderChildren(children)}</>
         </div >
